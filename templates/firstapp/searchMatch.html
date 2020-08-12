@@ -1,0 +1,146 @@
+{%extends 'firstapp/firstAppbase.html'%} {%block content%}
+<h4>
+  Your champion:
+  <img style="height: 30px;"
+    src="http://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{champion}}.png"
+    alt=""
+  />
+</h4>
+<h4>player1 summoenrname {{spielinfos.playerinfo.p1.summonerName}}</h4>
+<h4>player1 first items Code: {{spielinfos.playerinfo.p1.item_0}}</h4>
+<h4>player1 first items Code: {{spielinfos.playerinfo.p1.item_6}}</h4>
+<h4>player1 first spell: {{spielinfos.spieler0.spell_id1}}  
+    {{summonerspells.4}}  </h4>
+
+<h4>
+    
+   
+
+</h4>
+<h4>player1 first item: <img src="https://ddragon.leagueoflegends.com/cdn/10.16.1/img/item/{{spielinfos.playerinfo.p1.item_0}}.png" alt="{{spielinfos.playerinfo.p1.item_0}}"></h4>
+<h4>player1 first item: <img
+        src="https://ddragon.leagueoflegends.com/cdn/10.16.1/img/item/{{spielinfos.playerinfo.p1.item_6}}.png" alt="{{spielinfos.playerinfo.p1.item_6}}">
+</h4>
+<h4>Match: {{gameid}}</h4>
+{% load i18n %}
+<div class="row">
+
+<div class="col s12">
+    <div class="card-panel cp-champion">
+        <div class="undercp">
+        <div class="championimage">
+                <div style="overflow: hidden;" class="circle">
+                <img class="champicon circle" src="http://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{champion}}.png"
+                    alt="{{champion}} Icon" />
+                </div>
+                <span class="champleveloverimage circle">{{spielinfos.playerinfo.p1.champLevel}}</span>
+        </div>
+
+        <div class="playerspells">
+            <img style="margin-bottom: 5px;" src="http://ddragon.leagueoflegends.com/cdn/10.16.1/img/spell/{{spielinfos.playerinfo.p1.spell1url}}.png"
+                alt="{{spielinfos.playerinfo.p1.spell1url}}">
+            <img src="http://ddragon.leagueoflegends.com/cdn/10.16.1/img/spell/{{spielinfos.playerinfo.p1.spell2url}}.png"
+                    alt="{{spielinfos.playerinfo.p1.spell2url}}">
+        </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+{%if leftwins%}
+<div class="col s6 ">
+    <div style="height: 70px;" class="card-panel">(Winner)Bans:
+        {%for bans in spielinfos.left_bans%}
+        <img src="https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{bans}}.png" alt="{{bans}}"
+            class="circle championimgbans" />
+        {%endfor%}
+
+    </div>
+    KDA: {{spielinfos.left_total_kda.kills}} / {{spielinfos.left_total_kda.deaths}} / {{spielinfos.left_total_kda.assists}}
+</div>
+<div  class="col s6 ">
+    <div style="height: 70px;" class="card-panel">(Looser)Bans:
+        {%for bans in spielinfos.right_bans%}
+    <img src="https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{bans}}.png" alt="{{bans}}"
+        class="circle championimgbans" />
+    {%endfor%}
+        KDA: {{spielinfos.right_total_kda.kills}} / {{spielinfos.right_total_kda.deaths}} /
+        {{spielinfos.right_total_kda.assists}}
+</div>
+    
+</div>
+{%else%}
+<div class="col s6 ">
+    <div style="height: 70px;" class="card-panel">(Looser)Bans:
+        {%for bans in spielinfos.left_bans%}
+        <img src="https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{bans}}.png" alt="{{bans}}"
+            class="circle championimgbans" />
+        {%endfor%}
+        KDA: {{spielinfos.left_total_kda.kills}} / {{spielinfos.left_total_kda.deaths}} / {{spielinfos.left_total_kda.assists}}
+    </div>
+    
+</div>
+<div class="col s6 ">
+    <div style="height: 70px;" class="card-panel">(Winner)Bans:
+        {%for bans in spielinfos.right_bans%}
+        <img src="https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{bans}}.png" alt="{{bans}}"
+            class="circle championimgbans" />
+            {%endfor%}
+            KDA: {{spielinfos.right_total_kda.kills}} / {{spielinfos.right_total_kda.deaths}} / {{spielinfos.right_total_kda.assists}}
+            </div>
+        </div>
+{%endif%}
+
+{% for x in teamloopChampionName %}
+
+    {%if leftwins%}
+    <div class="col s6 ">
+        <div class="card-panel  {%cycle 'victory' 'lose' as spaltecolors%}">
+            <div style="overflow:hidden;" class="circle hidden">
+            <img src="https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{x}}.png" alt="{{x}}" class="championimg" />
+            </div>
+        <h3>{{spielinfos.spieler0.summonerName}}</h3>
+        </div>
+    </div>
+    {%else%}
+    <div class="col s6 ">
+        <div class="card-panel  {%cycle 'lose' 'victory' as spaltecolors%}">
+            <div style="overflow: hidden;" class="circle hidden">
+            <img
+                src="https://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{x}}.png" alt="{{x}}"
+                class="championimg" />
+            </div>
+            </div>
+    </div>
+
+    {%endif%}
+
+{%endfor%}
+</div>
+
+{%endblock content%}
+
+<!--<img
+  src="http://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{x}}.png"
+  alt=""
+/>
+
+{%with x="masteryi"%}
+{%endwith%}
+
+<ul class="collection col s12">
+    {%for x in teamloopChampionName%}
+    <li class="collection-item avatar col s4">
+        <img src="http://ddragon.leagueoflegends.com/cdn/10.16.1/img/champion/{{x}}.png" alt="icon" class="circle" />
+        <span class="title">{{x}}</span>
+        <p>First Line <br>
+            Second Line
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    {%endfor%}
+
+</ul>

@@ -1,0 +1,61 @@
+{%extends 'firstapp/firstAppbase.html'%} {%block content%}
+
+<div class="col s12">
+  <img
+    class="circle hoverable"
+    style="margin-left: auto; margin-right: auto; display: block;"
+    src="{{profile_icon_img}}"
+    alt=""
+  />
+  {{summoner_data}}
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">arrow_forward</i>Summoner Name:
+        {{summoner_name}}
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">arrow_forward</i>Summoner Level:
+        {{summoner_level}}
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">arrow_forward</i>Summoner ID: {{summoner_id}}
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">arrow_forward</i>Account ID: {{ account_id }}
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">arrow_forward</i>Puu ID: {{ puu_id }}
+      </div>
+    </li>
+  </ul>
+
+  <form action="{% url 'search_match'%}" method="post">
+    {% csrf_token%}
+    <input
+      type="hidden"
+      name="search_match_input_accountid"
+      value="{{account_id}}"
+    />
+    <input
+      type="hidden"
+      name="search_match_input_summonerserver"
+      value="{{summoner_server}}"
+    />
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      Last Match
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+  {%block match%} {%endblock match%}
+</div>
+
+{%endblock content%}
