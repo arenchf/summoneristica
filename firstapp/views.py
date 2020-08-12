@@ -27,7 +27,7 @@ def search_sum(request):
     FINAL_URL_SUMMONER = BASE_URL_SUMMONER.format(
         server_input, requote_uri(summoner_name))
     print('SUMMONER FINAL URL: ', FINAL_URL_SUMMONER)
-
+    print('HELLO GITHUB')
     r_summoner = json.loads(requests.get(
         FINAL_URL_SUMMONER, headers=HEADER).text)
     # print(r_summoner) prints all the summoner data as json
