@@ -1,13 +1,16 @@
-{%extends 'firstapp/firstAppbase.html'%} {%block content%}
+{%extends 'firstapp/firstAppbase.html'%} 
+
+
+
+{%block content%}
 
 <div class="col s12">
   <img
     class="circle hoverable"
     style="margin-left: auto; margin-right: auto; display: block;"
     src="{{profile_icon_img}}"
-    alt=""
+    alt="Profile Icon"
   />
-  {{summoner_data}}
   <ul class="collapsible">
     <li>
       <div class="collapsible-header">
@@ -55,6 +58,25 @@
       <i class="material-icons right">send</i>
     </button>
   </form>
+<br>
+  <form action="{% url 'matchlist'%}" method="post">
+    {% csrf_token%}
+    <input
+      type="hidden"
+      name="matchlist_input_accountid"
+      value="{{account_id}}"
+    />
+    <input
+      type="hidden"
+      name="matchlist_input_summonerserver"
+      value="{{summoner_server}}"
+    />
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      Matchlist
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+
   {%block match%} {%endblock match%}
 </div>
 
